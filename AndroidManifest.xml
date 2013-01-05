@@ -22,6 +22,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!-- provides search among users -->
+        <provider
+            android:name=".sqlite.UsersProvider"
+            android:authorities="com.example.sqlsavingdata.sqlite.UsersProvider"
+            android:exported="false" />
     </application>
 
 </manifest>
