@@ -6,5 +6,10 @@
     <string name="button_add">Add</string>
     <string name="button_edit">Edit</string>
     <string name="button_delete">Delete</string>
+    <string name="button_save">Save</string>
+    <string name="button_cancel">Cancel</string>
+    <string name="label_add_user">Enter user informations</string>
+    <string name="hint_username">Firstname Lastname</string>
+    <string name="hint_useremail">Email</string>
 
 </resources>
