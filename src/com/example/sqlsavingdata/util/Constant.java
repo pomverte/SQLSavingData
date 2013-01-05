@@ -1,4 +1,4 @@
-package com.example.sqlsavingdata;
+package com.example.sqlsavingdata.util;
 
 public abstract class Constant {
 
