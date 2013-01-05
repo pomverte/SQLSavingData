@@ -6,6 +6,8 @@ import android.support.v4.app.FragmentActivity;
 import android.view.Menu;
 import android.view.View;
 
+import com.example.sqlsavingdata.util.Constant;
+
 public class MainActivity extends FragmentActivity {
 
 	@Override
