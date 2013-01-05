@@ -11,23 +11,26 @@
         android:text="TODO : User List" />
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content" >
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/button_add" />
+            android:layout_weight="1"
+            android:text="@string/button_delete" />
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:text="@string/button_edit" />
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/button_delete" />
+            android:layout_weight="1"
+            android:text="@string/button_add" />
     </LinearLayout>
 
 </LinearLayout>
