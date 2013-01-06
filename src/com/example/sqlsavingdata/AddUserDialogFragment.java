@@ -10,6 +10,8 @@ import android.support.v4.app.DialogFragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.WindowManager.LayoutParams;
 import android.widget.EditText;
 
 import com.example.sqlsavingdata.util.Constant;
@@ -97,6 +99,14 @@ public class AddUserDialogFragment extends DialogFragment {
 		builder.setPositiveButton(R.string.button_save, saveListener);
 
 		return builder.create();
+	}
+
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+		// Show soft keyboard automatically
+		// note : can't call the method getDialog() in onCreateDialog since the dialog is being created
+		getDialog().getWindow().setSoftInputMode(LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+		return null;
 	}
 
 	public String getUserFullname() {
