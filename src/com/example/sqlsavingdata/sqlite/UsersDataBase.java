@@ -1,5 +1,6 @@
 package com.example.sqlsavingdata.sqlite;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -7,6 +8,12 @@ import android.util.Log;
 
 import com.example.sqlsavingdata.util.Constant;
 
+/**
+ * Implementation of the users database
+ * 
+ * @author PoMverte
+ * 
+ */
 public class UsersDataBase {
 
 	static final String DATABASE_NAME = "users.db";
@@ -19,6 +26,11 @@ public class UsersDataBase {
 		mDbHelper = new UsersDataBaseHelper(context);
 	}
 
+	public long insert(String table, String nullColumnHack, ContentValues values) {
+		SQLiteDatabase sqlDB = mDbHelper.getWritableDatabase();
+		return sqlDB.insert(table, nullColumnHack, values);
+	}
+
 	private static class UsersDataBaseHelper extends SQLiteOpenHelper {
 
 		private static final String TEXT_TYPE = " TEXT";
@@ -27,7 +39,7 @@ public class UsersDataBase {
 
 		private static final String SQL_CREATE_ENTRIES = "CREATE TABLE " + UsersEntry.TABLE_NAME + " (" + UsersEntry._ID
 				+ " INTEGER PRIMARY KEY" + COMMA_SEP + UsersEntry.COLUMN_NAME_USERS_FULLNAME + TEXT_TYPE + COMMA_SEP
-				+ UsersEntry.COLUMN_NAME_USERS_EMAIL + TEXT_TYPE + COMMA_SEP + ");";
+				+ UsersEntry.COLUMN_NAME_USERS_EMAIL + TEXT_TYPE + ");";
 
 		private static final String SQL_DELETE_ENTRIES = "DROP TABLE IF EXISTS " + UsersEntry.TABLE_NAME;
 
@@ -47,4 +59,5 @@ public class UsersDataBase {
 		}
 
 	}
+
 }
