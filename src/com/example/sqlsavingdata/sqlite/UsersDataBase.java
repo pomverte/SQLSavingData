@@ -2,8 +2,10 @@ package com.example.sqlsavingdata.sqlite;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.database.sqlite.SQLiteQueryBuilder;
 import android.util.Log;
 
 import com.example.sqlsavingdata.util.Constant;
@@ -29,6 +31,44 @@ public class UsersDataBase {
 	public long insert(String table, String nullColumnHack, ContentValues values) {
 		SQLiteDatabase sqlDB = mDbHelper.getWritableDatabase();
 		return sqlDB.insert(table, nullColumnHack, values);
+	}
+
+	/**
+	 * @param projection
+	 *            The columns to return
+	 * @param selection
+	 *            The selection clause
+	 * @param selectionArgs
+	 *            You may include ?s in selection, which will be replaced by the values from selectionArgs, in order
+	 *            that they appear in the selection. The values will be bound as Strings.
+	 * @param groupBy
+	 * @param having
+	 * @param sortOrder
+	 * @return A Cursor over all rows matching the query
+	 */
+	public Cursor query(String[] projection, String selection, String[] selectionArgs, String groupBy, String having,
+			String sortOrder) {
+
+		SQLiteDatabase sqlDB = mDbHelper.getWritableDatabase();
+
+		/*
+		 * The SQLiteBuilder provides a map for all possible columns requested to actual columns in the database,
+		 * creating a simple column alias mechanism by which the ContentProvider does not need to know the real column
+		 * names
+		 */
+		SQLiteQueryBuilder builder = new SQLiteQueryBuilder();
+		builder.setTables(UsersEntry.TABLE_NAME);
+		builder.setProjectionMap(null);
+
+		Cursor cursor = builder.query(sqlDB, projection, selection, selectionArgs, groupBy, having, sortOrder);
+
+		if (cursor == null) {
+			return null;
+		} else if (!cursor.moveToFirst()) {
+			cursor.close();
+			return null;
+		}
+		return cursor;
 	}
 
 	private static class UsersDataBaseHelper extends SQLiteOpenHelper {

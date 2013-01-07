@@ -75,7 +75,8 @@ public class UsersProvider extends ContentProvider {
 
 	@Override
 	public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
-		throw new UnsupportedOperationException("TODO query");
+		Log.d(Constant.TAG_SQL, "com.example.sqlsavingdata.sqlite.UsersProvider.query(Uri, String[], String, String[], String)");
+		return mUsersDataBase.query(projection, selection, selectionArgs, null, null, sortOrder);
 	}
 
 	@Override
