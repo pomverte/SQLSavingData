@@ -1,5 +1,8 @@
 package com.example.sqlsavingdata;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.net.Uri;
@@ -9,6 +12,8 @@ import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.sqlsavingdata.sqlite.UsersEntry;
@@ -66,18 +71,22 @@ public class MainActivity extends FragmentActivity implements AddUserDialogFragm
 		Cursor cursor = getContentResolver().query(UsersProvider.CONTENT_URI, projection, null, null, null);
 		int usersNumber = cursor.getCount();
 
-		TextView textView = (TextView) findViewById(R.id.users_list);
+		TextView textView = (TextView) findViewById(R.id.users_list_caption);
+		textView.setText(String.format("You have %s user(s) in your database :", usersNumber));
 
-		StringBuilder sb = new StringBuilder();
-		sb.append(String.format("You have %s user(s) in your database :\n", usersNumber));
+		ListView listView = (ListView) findViewById(R.id.users_list);
 
+		List<String> values = new ArrayList<String>();
 		while (!cursor.isAfterLast()) {
 			// fill the list with the user's name
 			String userFullName = cursor.getString(cursor.getColumnIndexOrThrow(UsersEntry.COLUMN_NAME_USERS_FULLNAME));
-			sb.append("\n\t- " + userFullName);
+			values.add(userFullName);
 			cursor.moveToNext();
 		}
 
-		textView.setText(sb.toString());
+		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.activity_list_item, android.R.id.text1,
+				values);
+
+		listView.setAdapter(adapter);
 	}
 }
